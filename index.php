@@ -52,7 +52,7 @@ if (isset($_POST['submit2'])){
     $id=$_POST['id'];
     $name=$_POST['name'];
     $family=$_POST['family'];
-    $query="UPDATE name SET id=".$id.",name=' ".$name." ' ".",family=' ".$family." ' WHERE id=".$id;
+    $query="UPDATE student SET id=".$id.",name=' ".$name." ' ".",family=' ".$family." ' WHERE id=".$id;
     $result=$db->prepare($query);
     $result->execute();
 }
@@ -79,9 +79,9 @@ if (isset($_GET['update'])){
  <label>id</label>
     <input type="text" name="id" value="'.$a['id'] .'" >
     <label>name</label>
-    <input type="text" name="id"  value="'.$a['name'] .'" >
+    <input type="text" name="name"  value="'.$a['name'] .'" >
     <label>family</label>
-    <input type="text" name="id"  value="'.$a['family'] .'" >
+    <input type="text" name="family"  value="'.$a['family'] .'" >
     <input type="submit" name="submit2" >
  </form>
  </fieldset>
