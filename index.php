@@ -1,3 +1,4 @@
+//وصل کردن کد به دیتا بیس
 <?php
 $host = "localhost";
 $user = "root";
@@ -5,6 +6,7 @@ $pass = "";
 $dbname = "school2";
 $db = new PDO("mysql:host=$host;dbname=$dbname", $user, $pass);
 ?>
+/*جدول بندی ستون ها*/
     <table border="1">
         <tr>
             <th>id</th>
@@ -13,6 +15,7 @@ $db = new PDO("mysql:host=$host;dbname=$dbname", $user, $pass);
             <th>edit</th>
             <th>update</th>
         </tr>
+         /*چاپ کردن دیتا هایی که از طریق دیتا بیس وارد کرده بودیم در جدول*/
         <?php
         $query = "SELECT * FROM student";
         $result = $db->prepare($query);
@@ -23,12 +26,14 @@ $db = new PDO("mysql:host=$host;dbname=$dbname", $user, $pass);
 <td>" . $a['id'] . "</td>
 <td>" . $a['name'] . "</td>
 <td>" . $a['family'] . "</td>
+//دکمه های ادیت و دیلیت داخل جدول
 <td><a href='index.php?delete=" . $a['id'] . "&&page=2'>delete</a> </td>
     <td><a href='index.php?update=" . $a['id'] . "&&page=2'>update</a> </td>
 </tr>
 ";
         }
         ?>
+        /*فیلد های submit1 برای insert که کارش اضافه کردن دیتا به جدئل از طریق سایت هست*/
     </table>
     <form method="post">
         <label>id</label>
@@ -39,6 +44,7 @@ $db = new PDO("mysql:host=$host;dbname=$dbname", $user, $pass);
         <input type="text" name="family" >
         <input type="submit" name="submit1" value="run">
     </form>
+/* کد insert برای اضافه کردن دیتا به جدول از طریق سایت */
 <?php
 if (isset($_POST['submit1'])){
     $id=$_POST['id'];
@@ -48,6 +54,7 @@ if (isset($_POST['submit1'])){
     $result = $db->prepare($query);
     $result->execute();
 }
+/*کد submit2 برای update یا همون edit کد دیتا های جدول رو بروزرسانی میکنه */
 if (isset($_POST['submit2'])){
     $id=$_POST['id'];
     $name=$_POST['name'];
@@ -56,6 +63,7 @@ if (isset($_POST['submit2'])){
     $result=$db->prepare($query);
     $result->execute();
 }
+/* کد پاک کردن دیتا از جدول و دیتا بیس*/
 ?>
 <?php
 if (isset($_GET['delete'])){
@@ -64,6 +72,7 @@ if (isset($_GET['delete'])){
     $result=$db->prepare($query);
     $result->execute();
 }
+/* کد و فیلد های دریافتی برای ادیت یا اپدیت دیتا های جدول*/
 ?>
 <?php
 if (isset($_GET['update'])){
