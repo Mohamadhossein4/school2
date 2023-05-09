@@ -27,8 +27,8 @@ $db = new PDO("mysql:host=$host;dbname=$dbname", $user, $pass);
 <td>" . $a['name'] . "</td>
 <td>" . $a['family'] . "</td>
 //دکمه های ادیت و دیلیت داخل جدول
-<td><a href='index.php?delete=" . $a['id'] . "&&page=2'>delete</a> </td>
-    <td><a href='index.php?update=" . $a['id'] . "&&page=2'>update</a> </td>
+<td><a href='index.php?delete=" . $a['id'] . "'>delete</a> </td>
+    <td><a href='index.php?update=" . $a['id'] . "'>update</a> </td>
 </tr>
 ";
         }
