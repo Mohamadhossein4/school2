@@ -10,6 +10,8 @@ $db = new PDO("mysql:host=$host;dbname=$dbname", $user, $pass);
             <th>id</th>
             <th>name</th>
             <th>family</th>
+            <th>edit</th>
+            <th>update</th>
         </tr>
         <?php
         $query = "SELECT * FROM student";
@@ -21,14 +23,19 @@ $db = new PDO("mysql:host=$host;dbname=$dbname", $user, $pass);
 <td>" . $a['id'] . "</td>
 <td>" . $a['name'] . "</td>
 <td>" . $a['family'] . "</td>
+<td><a href='index.php?delete=" . $a['id'] . "&&page=2'>delete</a> </td>
+    <td><a href='index.php?update=" . $a['id'] . "&&page=2'>update</a> </td>
 </tr>
 ";
         }
         ?>
     </table>
     <form method="post">
+        <label>id</label>
         <input type="text" name="id" >
+        <label>name</label>
         <input type="text" name="name" >
+        <label>family</label>
         <input type="text" name="family" >
         <input type="submit" name="submit1" value="run">
     </form>
@@ -41,5 +48,43 @@ if (isset($_POST['submit1'])){
     $result = $db->prepare($query);
     $result->execute();
 }
-
+if (isset($_POST['submit2'])){
+    $id=$_POST['id'];
+    $name=$_POST['name'];
+    $family=$_POST['family'];
+    $query="UPDATE name SET id=".$id.",name=' ".$name." ' ".",family=' ".$family." ' WHERE id=".$id;
+    $result=$db->prepare($query);
+    $result->execute();
+}
+?>
+<?php
+if (isset($_GET['delete'])){
+    $id=$_GET['delete'];
+    $query="delete  from student where id=".$id;
+    $result=$db->prepare($query);
+    $result->execute();
+}
+?>
+<?php
+if (isset($_GET['update'])){
+  $id=$_GET['update'];
+  $query=" select * from student where id=". $id;
+  $result=$db->prepare($query);
+  $result->execute();
+ $a=$result->fetch(PDO::FETCH_ASSOC);
+ echo '
+ <form method="post">
+ <fieldset>
+ <legend> name</legend>
+ <label>id</label>
+    <input type="text" name="id" value="'.$a['id'] .'" >
+    <label>name</label>
+    <input type="text" name="id"  value="'.$a['name'] .'" >
+    <label>family</label>
+    <input type="text" name="id"  value="'.$a['family'] .'" >
+    <input type="submit" name="submit2" >
+ </form>
+ </fieldset>
+ ';
+}
 ?>
